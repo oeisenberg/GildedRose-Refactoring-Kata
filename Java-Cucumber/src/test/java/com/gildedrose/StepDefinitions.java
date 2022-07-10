@@ -15,6 +15,12 @@ public class StepDefinitions {
         items[0] = new Item(name, 0, value);
         app = new GildedRose(items);
     }
+    
+    @Given("The item as {string} with sellby {int} and quality {int}")
+    public void initial_item_and_sellby_and_quality_is(String name, int sellIn, int value) {
+        items[0] = new Item(name, sellIn, value);
+        app = new GildedRose(items);
+    }
 
     @When("I update the quality")
     public void i_update_the_quality() {
