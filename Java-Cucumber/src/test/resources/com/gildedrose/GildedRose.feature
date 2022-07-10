@@ -5,3 +5,8 @@ Feature: Gilded Rose quality
     Given The item as "fixme"
     When I update the quality
     Then I should get item as "foo"
+
+  Scenario: Checking Legendary value stays constant
+    Given The item as "Sulfuras, Hand of Ragnaros" with quality 80
+    When I update the quality
+    Then I should get item quality as 80

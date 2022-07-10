@@ -11,8 +11,14 @@ public class StepDefinitions {
     private GildedRose app;
 
     @Given("The item as {string}")
-    public void initial_sellin_is_and_quality_is(String name) {
+    public void initial_item_is(String name) {
         items[0] = new Item(name, 0, 0);
+        app = new GildedRose(items);
+    }
+
+    @Given("The item as {string} with quality {int}")
+    public void initial_item_and_quality_is(String name, int value) {
+        items[0] = new Item(name, 0, value);
         app = new GildedRose(items);
     }
 
@@ -22,8 +28,13 @@ public class StepDefinitions {
     }
 
     @Then("I should get item as {string}")
-    public void i_should_get_sellin_as_and_quality_as(String expected) {
+    public void i_should_get_item_name(String expected) {
         assertEquals(expected, app.items[0].name);
+    }
+
+    @Then("I should get item quality as {int}")
+    public void i_should_get_item_and_quality_as(int expected) {
+        assertEquals(expected, app.items[0].quality);
     }
 }
 
