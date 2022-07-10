@@ -10,12 +10,6 @@ public class StepDefinitions {
     private Item[] items = new Item[1];
     private GildedRose app;
 
-    @Given("The item as {string}")
-    public void initial_item_is(String name) {
-        items[0] = new Item(name, 0, 0);
-        app = new GildedRose(items);
-    }
-
     @Given("The item as {string} with quality {int}")
     public void initial_item_and_quality_is(String name, int value) {
         items[0] = new Item(name, 0, value);
@@ -27,7 +21,7 @@ public class StepDefinitions {
         app.updateQuality();
     }
 
-    @Then("I should get item as {string}")
+    @Then("I should get item name as {string}")
     public void i_should_get_item_name(String expected) {
         assertEquals(expected, app.items[0].name);
     }
