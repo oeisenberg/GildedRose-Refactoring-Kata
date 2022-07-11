@@ -14,6 +14,8 @@ class GildedRose {
                 continue;
             }
 
+            int increment = item.name.equals("Conjured Mana Cake") ? 2 : 1;
+
             switch (item.name) {
                 case "Aged Brie":
                     if (item.quality < 50) {
@@ -34,7 +36,7 @@ class GildedRose {
                     break;
                 default:
                     if (item.quality > 0) {
-                        item.quality = item.quality - 1;
+                        item.quality = item.quality - increment;
                     }
             }
 
@@ -52,7 +54,7 @@ class GildedRose {
                         break;
                     default:
                         if (item.quality > 0) {
-                            item.quality = item.quality - 1;
+                            item.quality = item.quality - increment;
                         }
                 }
             }
