@@ -20,18 +20,15 @@ class GildedRose {
 
             switch (item.name) {
                 case "Aged Brie":
-                    item.quality = increaseQualityToCap(item);
+                    item.quality = increaseQualityToCap(item, 1);
                     break;
                 case "Backstage passes to a TAFKAL80ETC concert":
-                        // Increase by 1 by default
-                        item.quality = increaseQualityToCap(item);
-                        if (item.sellIn < 11) {
-                            // Increases again
-                            item.quality = increaseQualityToCap(item);
-                        }
                         if (item.sellIn < 6) {
-                            // Increases again
-                            item.quality = increaseQualityToCap(item);
+                            item.quality = increaseQualityToCap(item, 3);
+                        } else if (item.sellIn < 11) {
+                            item.quality = increaseQualityToCap(item, 2);
+                        } else {
+                            item.quality = increaseQualityToCap(item, 1);
                         }
                     break;
                 default:
@@ -45,7 +42,7 @@ class GildedRose {
             if (item.sellIn < 0) {
                 switch (item.name) {
                     case "Aged Brie":
-                        item.quality = increaseQualityToCap(item);
+                        item.quality = increaseQualityToCap(item, 1);
                         break;
                     case "Backstage passes to a TAFKAL80ETC concert":
                         item.quality = 0;
@@ -59,9 +56,9 @@ class GildedRose {
         }
     }
 
-    private int increaseQualityToCap(Item item) {
+    private int increaseQualityToCap(Item item, int increment) {
         if (item.quality < 50) {
-            return item.quality + 1;
+            return item.quality + increment;
         } else {
             return 50;
         }
