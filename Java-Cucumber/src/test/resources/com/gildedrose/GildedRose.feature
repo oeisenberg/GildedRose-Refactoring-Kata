@@ -25,3 +25,23 @@ Feature: Gilded Rose quality
     Given The item as "normal item" with sellby 0 and quality 10
     When I update the quality
     Then I should get item quality as 8
+
+  Scenario: Checking a backstage pass's quality increases correctly when there are five days or less remaining
+    Given The item as "Backstage passes to a TAFKAL80ETC concert" with sellby 5 and quality 10
+    When I update the quality
+    Then I should get item quality as 13
+
+  Scenario: Checking a backstage pass's quality increases correctly when there are ten days or less remaining
+    Given The item as "Backstage passes to a TAFKAL80ETC concert" with sellby 10 and quality 10
+    When I update the quality
+    Then I should get item quality as 12
+
+  Scenario: Checking a backstage pass's quality increases correctly when there are more than ten days remaining
+    Given The item as "Backstage passes to a TAFKAL80ETC concert" with sellby 16 and quality 10
+    When I update the quality
+    Then I should get item quality as 11
+
+  Scenario: Checking a backstage pass's quality falls to 0 if after the sellby
+    Given The item as "Backstage passes to a TAFKAL80ETC concert" with sellby -1 and quality 10
+    When I update the quality
+    Then I should get item quality as 0
