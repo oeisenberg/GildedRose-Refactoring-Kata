@@ -17,12 +17,9 @@ class GildedRose {
                 continue;
             }
 
-            // decrement for quality doubles if it a Conjured item.
-            int factor = item.name.equals("Conjured Mana Cake") ? 2 : 1;
-
             switch (item.name) {
                 case "Aged Brie":
-                    item.quality = increaseQualityToCap(item, calculateDelta(item, factor, 1));
+                    item.quality = increaseQualityToCap(item, calculateDelta(item, 1));
                     break;
                 case "Backstage passes to a TAFKAL80ETC concert":
                     if (item.sellIn < 0) {
@@ -38,7 +35,7 @@ class GildedRose {
                     }
                     break;
                 default:
-                    item.quality = decreaseQualityToFloor(item, calculateDelta(item, factor, 1));
+                    item.quality = decreaseQualityToFloor(item, calculateDelta(item, 1));
             }
         }
     }
@@ -58,10 +55,12 @@ class GildedRose {
         return value;
     }
 
-    private int calculateDelta(Item item, int multiplier, int value) {
-        if (item.sellIn < 0) {
-            multiplier *= 2;
-        }
+    private int calculateDelta(Item item, int value) {
+        // Multiplier for quality doubles if it a Conjured item.
+        int multiplier = item.name.equals("Conjured Mana Cake") ? 2 : 1;
+        // Multiplier for quality doubles if item is passed sellby.
+        multiplier *= item.sellIn < 0 ? 2 : 1;
+        // Applies multiplier to the value.
         return value *= multiplier;
     }
 }
