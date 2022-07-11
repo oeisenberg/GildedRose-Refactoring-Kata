@@ -41,18 +41,12 @@ class GildedRose {
     }
 
     private int increaseQualityToCap(Item item, int increment) {
-        if (item.quality < 50) {
-            return item.quality + increment;
-        }
-        return 50;
+        return item.quality < 50 ? item.quality + increment : 50;
     }
 
     private int decreaseQualityToFloor(Item item, int decrement) {
         int value = item.quality - decrement;
-        if (value < 0) {
-            return 0;
-        }
-        return value;
+        return value < 0 ? 0 : value;
     }
 
     private int calculateDelta(Item item, int value) {
