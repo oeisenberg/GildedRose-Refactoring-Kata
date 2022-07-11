@@ -18,15 +18,14 @@ class GildedRose {
             }
 
             // decrement for quality doubles if it a Conjured item.
-            int decrement = item.name.equals("Conjured Mana Cake") ? 2 : 1;
+            int factor = item.name.equals("Conjured Mana Cake") ? 2 : 1;
 
             switch (item.name) {
                 case "Aged Brie":
                     if (item.sellIn < 0) {
-                        item.quality = increaseQualityToCap(item, 2);
-                    } else {
-                        item.quality = increaseQualityToCap(item, 1);
+                        factor *= 2;
                     }
+                    item.quality = increaseQualityToCap(item, 1 * factor);
                     break;
                 case "Backstage passes to a TAFKAL80ETC concert":
                     if (item.sellIn < 0) {
@@ -43,9 +42,9 @@ class GildedRose {
                     break;
                 default:
                     if (item.sellIn < 0) {
-                        item.quality = decreaseQualityToFloor(item, decrement);
+                        factor *= 2;
                     }
-                    item.quality = decreaseQualityToFloor(item, decrement);
+                    item.quality = decreaseQualityToFloor(item, 1 * factor);
             }
         }
     }
