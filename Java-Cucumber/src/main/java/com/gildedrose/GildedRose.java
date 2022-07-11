@@ -10,7 +10,7 @@ class GildedRose {
     public void updateQuality() {
         for (Item item : this.items) {
             // Progresses through the sellIn count down.
-            item.sellIn = item.sellIn - 1;
+            item.sellIn -= 1;
 
             // Legendary item's don't change value.
             if (isLegendary(item.name)) {
@@ -64,7 +64,7 @@ class GildedRose {
         return value < 0 ? 0 : value;
     }
 
-    // Calculates the delta to be applying any relevant mutliplies.
+    // Calculates the delta to be applied using relevant multipliers.
     private int calculateDelta(Item item, int value) {
         // Multiplier for quality doubles if it a Conjured item.
         int multiplier = isConjured(item.name) ? 2 : 1;
