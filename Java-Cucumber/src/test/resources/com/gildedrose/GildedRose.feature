@@ -15,3 +15,13 @@ Feature: Gilded Rose quality
     Given The item as "Sulfuras, Hand of Ragnaros" with quality 80
     When I update the quality
     Then I should get item quality as 80
+
+  Scenario: Checking a normal item's quality decreases
+    Given The item as "normal item" with sellby 1 and quality 10
+    When I update the quality
+    Then I should get item quality as 9
+
+  Scenario: Checking a normal item's quality decreases twice as fast if past sellby
+    Given The item as "normal item" with sellby 0 and quality 10
+    When I update the quality
+    Then I should get item quality as 8
