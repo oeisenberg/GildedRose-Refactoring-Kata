@@ -20,23 +20,19 @@ class GildedRose {
 
             switch (item.name) {
                 case "Aged Brie":
-                    if (item.quality < 50) {
-                        item.quality = item.quality + 1;
-                    }
+                    item.quality = increaseQualityToCap(item);
                     break;
                 case "Backstage passes to a TAFKAL80ETC concert":
-                    if (item.quality < 50) {
                         // Increase by 1 by default
-                        item.quality = item.quality + 1;
+                        item.quality = increaseQualityToCap(item);
                         if (item.sellIn < 11) {
                             // Increases again
-                            item.quality = item.quality + 1;
+                            item.quality = increaseQualityToCap(item);
                         }
                         if (item.sellIn < 6) {
                             // Increases again
-                            item.quality = item.quality + 1;
+                            item.quality = increaseQualityToCap(item);
                         }
-                    }
                     break;
                 default:
                     if (item.quality > 0) {
@@ -49,9 +45,7 @@ class GildedRose {
             if (item.sellIn < 0) {
                 switch (item.name) {
                     case "Aged Brie":
-                        if (item.quality < 50) {
-                            item.quality = item.quality + 1;
-                        }
+                        item.quality = increaseQualityToCap(item);
                         break;
                     case "Backstage passes to a TAFKAL80ETC concert":
                         item.quality = 0;
@@ -62,6 +56,14 @@ class GildedRose {
                         }
                 }
             }
+        }
+    }
+
+    private int increaseQualityToCap(Item item) {
+        if (item.quality < 50) {
+            return item.quality + 1;
+        } else {
+            return 50;
         }
     }
 }
