@@ -17,27 +17,28 @@ class GildedRose {
                 continue;
             }
 
-            switch (item.name) {
-                case "Aged Brie":
-                    item.quality = increaseQualityToCap(item, calculateDelta(item, 1));
-                    break;
-                case "Backstage passes to a TAFKAL80ETC concert":
-                    if (item.sellIn < 0) {
-                        item.quality = 0;
+            if (isAgedBrie(item.name)) {
+                item.quality = increaseQualityToCap(item, calculateDelta(item, 1));
+            } else if (areBackStagePasses(item.name)) {
+                if (item.sellIn < 0) {
+                    item.quality = 0;
+                } else {
+                    if (item.sellIn < 6) {
+                        item.quality = increaseQualityToCap(item, 3);
+                    } else if (item.sellIn < 11) {
+                        item.quality = increaseQualityToCap(item, 2);
                     } else {
-                        if (item.sellIn < 6) {
-                            item.quality = increaseQualityToCap(item, 3);
-                        } else if (item.sellIn < 11) {
-                            item.quality = increaseQualityToCap(item, 2);
-                        } else {
-                            item.quality = increaseQualityToCap(item, 1);
-                        }
+                        item.quality = increaseQualityToCap(item, 1);
                     }
-                    break;
-                default:
-                    item.quality = decreaseQualityToFloor(item, calculateDelta(item, 1));
+                }
+            } else {
+                item.quality = decreaseQualityToFloor(item, calculateDelta(item, 1));
             }
         }
+    }
+
+    private boolean isAgedBrie(String itemName) {
+        return itemName.toLowerCase().contains("aged brie") ? true : false;
     }
 
     private boolean isLegendary(String itemName) {
