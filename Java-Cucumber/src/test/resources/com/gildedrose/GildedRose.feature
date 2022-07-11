@@ -55,3 +55,18 @@ Feature: Gilded Rose quality
     Given The item as "Backstage passes to a TAFKAL80ETC concert" with sellby -1 and quality 10
     When I update the quality
     Then I should get item quality as 0
+
+  Scenario: Checking a conjured item's quality decreases
+    Given The item as "Conjured Mana Cake" with sellby 1 and quality 10
+    When I update the quality
+    Then I should get item quality as 8
+
+  Scenario: Checking a conjured item's quality decreases twice as fast if past sellby
+    Given The item as "Conjured Mana Cake" with sellby 0 and quality 10
+    When I update the quality
+    Then I should get item quality as 6
+
+  Scenario: Checking a conjured item's quality remains at 0 and doesn't go negative
+    Given The item as "Conjured Mana Cake" with sellby 0 and quality 0
+    When I update the quality
+    Then I should get item quality as 0
