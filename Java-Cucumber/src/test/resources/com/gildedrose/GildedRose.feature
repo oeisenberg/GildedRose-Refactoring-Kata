@@ -26,6 +26,11 @@ Feature: Gilded Rose quality
     When I update the quality
     Then I should get item quality as 8
 
+  Scenario: Checking a normal item's quality remains at 0 and doesn't go negative
+    Given The item as "normal item" with sellby 0 and quality 0
+    When I update the quality
+    Then I should get item quality as 0
+
   Scenario: Checking a backstage pass's quality increases correctly when there are five days or less remaining
     Given The item as "Backstage passes to a TAFKAL80ETC concert" with sellby 5 and quality 10
     When I update the quality
