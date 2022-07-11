@@ -22,10 +22,7 @@ class GildedRose {
 
             switch (item.name) {
                 case "Aged Brie":
-                    if (item.sellIn < 0) {
-                        factor *= 2;
-                    }
-                    item.quality = increaseQualityToCap(item, 1 * factor);
+                    item.quality = increaseQualityToCap(item, calculateDelta(item, factor, 1));
                     break;
                 case "Backstage passes to a TAFKAL80ETC concert":
                     if (item.sellIn < 0) {
@@ -41,10 +38,7 @@ class GildedRose {
                     }
                     break;
                 default:
-                    if (item.sellIn < 0) {
-                        factor *= 2;
-                    }
-                    item.quality = decreaseQualityToFloor(item, 1 * factor);
+                    item.quality = decreaseQualityToFloor(item, calculateDelta(item, factor, 1));
             }
         }
     }
@@ -62,5 +56,12 @@ class GildedRose {
             return 0;
         }
         return value;
+    }
+
+    private int calculateDelta(Item item, int multiplier, int value) {
+        if (item.sellIn < 0) {
+            multiplier *= 2;
+        }
+        return value *= multiplier;
     }
 }
