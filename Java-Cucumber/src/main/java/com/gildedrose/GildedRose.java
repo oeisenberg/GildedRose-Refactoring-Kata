@@ -10,10 +10,12 @@ class GildedRose {
     public void updateQuality() {
         for (Item item : this.items) {
 
+            // Legendary item's don't change value.
             if (item.name.equals("Sulfuras, Hand of Ragnaros")) {
                 continue;
             }
 
+            // Increment for quality doubles if it a Conjured item.
             int increment = item.name.equals("Conjured Mana Cake") ? 2 : 1;
 
             switch (item.name) {
@@ -24,12 +26,14 @@ class GildedRose {
                     break;
                 case "Backstage passes to a TAFKAL80ETC concert":
                     if (item.quality < 50) {
+                        // Increase by 1 by default
                         item.quality = item.quality + 1;
                         if (item.sellIn < 11) {
+                            // Increases again
                             item.quality = item.quality + 1;
                         }
-
                         if (item.sellIn < 6) {
+                            // Increases again
                             item.quality = item.quality + 1;
                         }
                     }
