@@ -9,7 +9,7 @@ class GildedRose {
 
     public void updateQuality() {
         for (Item item : this.items) {
-            // Decreases the sellIn count down.
+            // Progresses through the sellIn count down.
             item.sellIn = item.sellIn - 1;
 
             // Legendary item's don't change value.
@@ -40,15 +40,18 @@ class GildedRose {
         }
     }
 
+    // Increments the item's quality to 50.
     private int increaseQualityToCap(Item item, int increment) {
         return item.quality < 50 ? item.quality + increment : 50;
     }
 
+    // Decreases the item's quality to 0.
     private int decreaseQualityToFloor(Item item, int decrement) {
         int value = item.quality - decrement;
         return value < 0 ? 0 : value;
     }
 
+    // Calculates the delta to be applying any relevant mutliplies.
     private int calculateDelta(Item item, int value) {
         // Multiplier for quality doubles if it a Conjured item.
         int multiplier = item.name.equals("Conjured Mana Cake") ? 2 : 1;
