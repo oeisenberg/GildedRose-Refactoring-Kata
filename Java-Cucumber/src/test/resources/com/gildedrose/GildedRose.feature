@@ -6,6 +6,11 @@ Feature: Gilded Rose quality
     When I update the quality
     Then I should get item quality as 11
 
+  Scenario: Checking Brie's quality increases when sellby is passed
+    Given The item as "Aged Brie" with sellby 0 and quality 10
+    When I update the quality
+    Then I should get item quality as 12
+
   Scenario: Checking Brie's quality doesn't increase past 50
     Given The item as "Aged Brie" with quality 50
     When I update the quality
