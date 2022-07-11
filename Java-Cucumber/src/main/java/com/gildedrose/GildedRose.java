@@ -13,7 +13,7 @@ class GildedRose {
             item.sellIn = item.sellIn - 1;
 
             // Legendary item's don't change value.
-            if (item.name.equals("Sulfuras, Hand of Ragnaros")) {
+            if (isLegendary(item.name)) {
                 continue;
             }
 
@@ -40,6 +40,18 @@ class GildedRose {
         }
     }
 
+    private boolean isLegendary(String itemName) {
+        return itemName.toLowerCase().contains("sulfuras") ? true : false;
+    }
+
+    private boolean areBackStagePasses(String itemName) {
+        return itemName.toLowerCase().contains("backstage passes") ? true : false;
+    }
+
+    private boolean isConjured(String itemName) {
+        return itemName.toLowerCase().contains("conjured") ? true : false;
+    }
+
     // Increments the item's quality to 50.
     private int increaseQualityToCap(Item item, int increment) {
         return item.quality < 50 ? item.quality + increment : 50;
@@ -54,7 +66,7 @@ class GildedRose {
     // Calculates the delta to be applying any relevant mutliplies.
     private int calculateDelta(Item item, int value) {
         // Multiplier for quality doubles if it a Conjured item.
-        int multiplier = item.name.equals("Conjured Mana Cake") ? 2 : 1;
+        int multiplier = isConjured(item.name) ? 2 : 1;
         // Multiplier for quality doubles if item is passed sellby.
         multiplier *= item.sellIn < 0 ? 2 : 1;
         // Applies multiplier to the value.
