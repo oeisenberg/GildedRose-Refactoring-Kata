@@ -9,6 +9,8 @@ class GildedRose {
 
     public void updateQuality() {
         for (Item item : this.items) {
+            // Decreases the sellIn count down.
+            item.sellIn = item.sellIn - 1;
 
             // Legendary item's don't change value.
             if (item.name.equals("Sulfuras, Hand of Ragnaros")) {
@@ -20,9 +22,16 @@ class GildedRose {
 
             switch (item.name) {
                 case "Aged Brie":
-                    item.quality = increaseQualityToCap(item, 1);
+                    if (item.sellIn < 0) {
+                        item.quality = increaseQualityToCap(item, 2);
+                    } else {
+                        item.quality = increaseQualityToCap(item, 1);
+                    }
                     break;
                 case "Backstage passes to a TAFKAL80ETC concert":
+                    if (item.sellIn < 0) {
+                        item.quality = 0;
+                    } else {
                         if (item.sellIn < 6) {
                             item.quality = increaseQualityToCap(item, 3);
                         } else if (item.sellIn < 11) {
@@ -30,24 +39,13 @@ class GildedRose {
                         } else {
                             item.quality = increaseQualityToCap(item, 1);
                         }
+                    }
                     break;
                 default:
-                    item.quality = decreaseQualityToFloor(item, decrement);
-            }
-
-            item.sellIn = item.sellIn - 1;
-
-            if (item.sellIn < 0) {
-                switch (item.name) {
-                    case "Aged Brie":
-                        item.quality = increaseQualityToCap(item, 1);
-                        break;
-                    case "Backstage passes to a TAFKAL80ETC concert":
-                        item.quality = 0;
-                        break;
-                    default:
+                    if (item.sellIn < 0) {
                         item.quality = decreaseQualityToFloor(item, decrement);
-                }
+                    }
+                    item.quality = decreaseQualityToFloor(item, decrement);
             }
         }
     }
