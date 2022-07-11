@@ -47,15 +47,15 @@ class GildedRose {
                             items[i].quality = items[i].quality + 1;
                         }
                         break;
+                    case "Backstage passes to a TAFKAL80ETC concert":
+                        items[i].quality = items[i].quality - items[i].quality;
+                        break;
+                    case "Sulfuras, Hand of Ragnaros":
+                        // Quality never changes.
+                        break;
                     default:
-                        if (!items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-                            if (items[i].quality > 0) {
-                                if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) {
-                                    items[i].quality = items[i].quality - 1;
-                                }
-                            }
-                        } else {
-                            items[i].quality = items[i].quality - items[i].quality;
+                        if (items[i].quality > 0) {
+                            items[i].quality = items[i].quality - 1;
                         }
                 }
             }
