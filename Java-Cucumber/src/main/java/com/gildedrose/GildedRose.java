@@ -54,7 +54,7 @@ class GildedRose {
                         }
                         break;
                     case "Backstage passes to a TAFKAL80ETC concert":
-                        item.quality = item.quality - item.quality;
+                        item.quality = 0;
                         break;
                     default:
                         if (item.quality > 0) {
