@@ -55,9 +55,8 @@ class GildedRose {
     private int increaseQualityToCap(Item item, int increment) {
         if (item.quality < 50) {
             return item.quality + increment;
-        } else {
-            return 50;
         }
+        return 50;
     }
 
     private int decreaseQualityToFloor(Item item, int decrement) {
