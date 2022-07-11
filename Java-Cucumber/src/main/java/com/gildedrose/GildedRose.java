@@ -15,8 +15,8 @@ class GildedRose {
                 continue;
             }
 
-            // Increment for quality doubles if it a Conjured item.
-            int increment = item.name.equals("Conjured Mana Cake") ? 2 : 1;
+            // decrement for quality doubles if it a Conjured item.
+            int decrement = item.name.equals("Conjured Mana Cake") ? 2 : 1;
 
             switch (item.name) {
                 case "Aged Brie":
@@ -32,9 +32,7 @@ class GildedRose {
                         }
                     break;
                 default:
-                    if (item.quality > 0) {
-                        item.quality = item.quality - increment;
-                    }
+                    item.quality = decreaseQualityToFloor(item, decrement);
             }
 
             item.sellIn = item.sellIn - 1;
@@ -48,9 +46,7 @@ class GildedRose {
                         item.quality = 0;
                         break;
                     default:
-                        if (item.quality > 0) {
-                            item.quality = item.quality - increment;
-                        }
+                        item.quality = decreaseQualityToFloor(item, decrement);
                 }
             }
         }
@@ -62,5 +58,13 @@ class GildedRose {
         } else {
             return 50;
         }
+    }
+
+    private int decreaseQualityToFloor(Item item, int decrement) {
+        int value = item.quality - decrement;
+        if (value < 0) {
+            return 0;
+        }
+        return value;
     }
 }
